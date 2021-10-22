@@ -1,5 +1,5 @@
 import ProductoDAO from "../dao/productoDAO.js"
-import jwt from "jwt-decode";
+
 
 export default class ProductoController {
   static async apiGetProducto(req, res, next) {
