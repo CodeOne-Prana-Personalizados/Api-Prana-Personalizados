@@ -4,6 +4,7 @@ import UsuarioCtrl from "./usuario.controller.js"
 
 const router = express.Router()
 
+
 /*router.route("/").get((req, res) => res.send("Hello world"))*/
 router.route("/").get(ProductoCtrl.apiGetProducto)
 /*router.route("/usuario").get(UsuarioCtrl.apiGetUsuario)
@@ -25,4 +26,9 @@ router
   .put(UsuarioCtrl.apiUpdateUsuario)
   .delete(UsuarioCtrl.apiDeleteUsuario)
 
+  router
+  .route('/usuarios/self')
+  .get(UsuarioCtrl.apiGetDatosUsuario
+  );
+  
 export default router
