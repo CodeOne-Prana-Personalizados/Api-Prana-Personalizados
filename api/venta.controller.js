@@ -9,8 +9,8 @@ export default class VentaController {
     let filters = {}
     if (req.query.descripcion) {
       filters.descripcion = req.query.descripcion
-    } else if (req.query.id_ventas) {
-      filters.id_ventas = req.query.ventas
+    } else if (req.query.id_venta) {
+      filters.id_venta = req.query.venta
     } 
 
     const { ventasList, totalNumVentas } = await VentaDAO.getVenta({
@@ -31,7 +31,7 @@ export default class VentaController {
 
   static async apiPostVenta(req, res, next) {
     try {
-      const id_ventas = req.body.id_ventas
+      const id_venta = req.body.id_venta
       const id_cliente = req.body.id_cliente
       const vendedor = req.body.vendedor
       const nombre_cliente = req.body.nombre_cliente
@@ -40,7 +40,7 @@ export default class VentaController {
       const valor_venta = req.body.valor_venta
 
       const MiVenta = await VentaDAO.addVenta(
-        id_ventas,
+        id_venta,
         id_cliente,
         vendedor,
         nombre_cliente,
@@ -57,7 +57,7 @@ export default class VentaController {
 
   static async apiUpdateVenta(req, res, next) {
     try {
-      const id_ventas = req.body.id_ventas
+      const id_venta = req.body.id_venta
         const id_cliente = req.body.id_cliente
         const vendedor = req.body.vendedor
         const nombre_cliente= req.body.nombre_cliente
@@ -66,7 +66,7 @@ export default class VentaController {
         const valor_venta = req.body.valor_venta
 
       const MiVenta = await VentaDAO.updateVenta(
-        id_ventas,
+        id_venta,
         id_cliente,
         vendedor,
         nombre_cliente,
@@ -90,11 +90,11 @@ export default class VentaController {
 
   static async apiDeleteVenta(req, res, next) {
     try {
-      const id_ventas = req.body.id_ventas
+      const id_venta = req.body.id_venta
 
-      console.log(id_ventas)
+      console.log(id_venta)
       const MiVenta = await VentaDAO.deleteVenta(
-        id_ventas,
+        id_venta,
       )
       res.json({ status: "success" })
     } catch (e) {
