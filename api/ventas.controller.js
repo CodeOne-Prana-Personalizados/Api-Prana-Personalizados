@@ -1,85 +1,83 @@
 import { ObjectId } from "bson"
-import UsuarioDAO from "../dao/usuarioDAO.js"
+import VentasDAO from "../dao/ventasDAO.js"
 import jwt from "jwt-decode";
 
 
-export default class UsuarioController {
+export default class VentasController {
   static async apiGetUsuario(req, res, next) {
-    const usuariosPerPage = req.query.usuariosPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20
+    const ventasPerPage = req.query.ventasPerPage ? parseInt(req.query.ventasPerPage, 10) : 20
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
     let filters = {}
     if (req.query.descripcion) {
       filters.descripcion = req.query.descripcion
-    } else if (req.query.id_usuario) {
+    } else if (req.query.id_ventas) {
       filters.id_usuario = req.query.id_usuario
     } 
 
-    const { usuariosList, totalNumusuarios } = await UsuarioDAO.getUsuario({
+    const { ventasList, totalNumventas } = await VentasDAO.getVentas({
       filters,
       page,
-      usuariosPerPage,
+      ventasPerPage,
     })
 
     let response = {
-      usuarios: usuariosList,
+      usuarios: ventasList,
       page: page,
       filters: filters,
-      entries_per_page: usuariosPerPage,
-      total_results: totalNumusuarios,
+      entries_per_page: ventasPerPage,
+      total_results: totalNumventas,
     }
     res.json(response)
   }
-  static async apiGetDatosUsuario(req, res, next) {
+  static async apiGetDatosVentas(req, res, next) {
     console.log('HOLAAAA')
-    consultarOcrearusuario(req, genercCallback(res));
-    const usuariosPerPage = req.query.usuariosPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20
+    consultarOcrearventas(req, genercCallback(res));
+    const usuariosPerPage = req.query.ventasPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
     let filters = {}
     if (req.query.descripcion) {
       filters.descripcion = req.query.descripcion
-    } else if (req.query.id_usuario) {
-      filters.id_usuario = req.query.id_usuario
+    } else if (req.query.id_ventas) {
+      filters.id_ventas = req.query.id_ventas
     } 
 
-    const { usuariosList, totalNumusuarios } = await UsuarioDAO.getUsuario({
+    const { ventasList, totalNumventas } = await VentasDAO.getVentas({
         filters,
         page,
-        usuariosPerPage,
+        ventasPerPage,
       })
 
       let response = {
-        usuarios: usuariosList,
+        ventas: ventasList,
         page: page,
         filters: filters,
-        entries_per_page: usuariosPerPage,
-        total_results: totalNumusuarios,
+        entries_per_page: ventasPerPage,
+        total_results: totalNumventas,
       }
       res.json(response)
     console.log('HOLA LEEME')
   }
   
 
-  static async apiPostUsuario(req, res, next) {
+  static async apiPostVentas(req, res, next) {
     try {
-      const id_usuario = req.body.id_usuario
-      const nombre = req.body.nombre
-      const correo = req.body.correo
-      const celular = req.body.celular
-      const fecha_ingreso = req.body.fecha_ingreso
-      const estado = req.body.estado
-      const rol = req.body.rol
+      const id_ventas = req.body.id_ventas
+      const id_cliente = req.body.id_cliente
+      const vendedor = req.body.vendedor
+      const fecha_venta = req.body.fecha_venta
+      const festado_venta = req.body.estado_venta
+      const estado_venta = req.body.estado_venta
 
 
       const MiUsuario = await UsuarioDAO.addUsuario(
-        id_usuario,
-        nombre,
-        correo,
-        celular,
-        fecha_ingreso,
-        estado,
-        rol,
+      id_ventas,
+      id_cliente,
+      vendedor,
+      fecha_venta,
+      estado_venta,
+      estado_venta,
       )
       res.json({ status: "success" })
     } catch (e) {
@@ -89,25 +87,23 @@ export default class UsuarioController {
 
   static async apiUpdateUsuario(req, res, next) {
     try {
-      const id_usuario = req.body.id_usuario
-      const nombre = req.body.nombre
-      const correo = req.body.correo
-      const celular = req.body.celular
-      const fecha_ingreso = req.body.fecha_ingreso
-      const estado = req.body.estado
-      const rol = req.body.rol
+        const id_ventas = req.body.id_ventas
+        const id_cliente = req.body.id_cliente
+        const vendedor = req.body.vendedor
+        const fecha_venta = req.body.fecha_venta
+        const festado_venta = req.body.estado_venta
+        const estado_venta = req.body.estado_venta
 
       const MiUsuario = await UsuarioDAO.updateUsuario(
-        id_usuario,
-        nombre,
-        correo,
-        celular,
-        fecha_ingreso,
-        estado,
-        rol,
+      id_ventas,
+      id_cliente,
+      vendedor,
+      fecha_venta,
+      estado_venta,
+      estado_venta,
       )
 
-      var { error } = MiUsuario
+      var { error } = MiVentas
       if (error) {
         res.status(400).json({ error })
       }
@@ -119,13 +115,13 @@ export default class UsuarioController {
     }
   }
 
-  static async apiDeleteUsuario(req, res, next) {
+  static async apiDeleteVentas(req, res, next) {
     try {
-      const id_usuario = req.body.id_usuario
+      const id_ventas = req.body.id_ventas
 
-      console.log(id_usuario)
-      const MiUsuario = await UsuarioDAO.deleteUsuario(
-        id_usuario,
+      console.log(id_ventas)
+      const MiVentas = await VentasDAO.deleteVentas(
+        id_ventas,
       )
       res.json({ status: "success" })
     } catch (e) {
