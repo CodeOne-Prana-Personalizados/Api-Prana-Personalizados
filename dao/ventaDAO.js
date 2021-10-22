@@ -2,7 +2,7 @@ import mongodb from "mongodb"
 const ObjectId = mongodb.ObjectID
 let ventas
 
-export default class VentasDAO {
+export default class VentaDAO {
   static async injectDB(conn) {
     if (ventas) {
       return
@@ -11,12 +11,12 @@ export default class VentasDAO {
       ventas = await conn.db(process.env.RESTREVIEWS_NS).collection("ventas")
     } catch (e) {
       console.error(
-        `Unable to establish a collection handle in VentasDAO: ${e}`,
+        `Unable to establish a collection handle in VentaDAO: ${e}`,
       )
     }
   }
 
-  static async getVentas({
+  static async getVenta({
     filters = null,
     page = 0,
     ventassPerPage = 20,
@@ -55,7 +55,7 @@ export default class VentasDAO {
     }
   }
 
-  static async addVentas(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
+  static async addVenta(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
     try {
       const ventasDoc = { id_ventas: id_ventas,
         id_cliente: id_cliente,
@@ -72,7 +72,7 @@ export default class VentasDAO {
     }
   }
 
-  static async updateVentas(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
+  static async updateVenta(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
     try {
       const updateVentas = await venta.updateOne(
         /*{ id_ventas:"3"},*/
@@ -88,7 +88,7 @@ export default class VentasDAO {
     }
   }
 
-  static async deleteVentas(id_ventas) {
+  static async deleteVenta(id_ventas) {
 
     try {
       const deleteVentas = await ventas.deleteOne({
