@@ -1,99 +1,101 @@
 import mongodb from "mongodb"
 const ObjectId = mongodb.ObjectID
-let producto
+let ventas
 
-export default class ProductoDAO {
+export default class VentasDAO {
   static async injectDB(conn) {
-    if (producto) {
+    if (ventas) {
       return
     }
     try {
-      producto = await conn.db(process.env.RESTREVIEWS_NS).collection("producto")
+      ventas = await conn.db(process.env.RESTREVIEWS_NS).collection("ventas")
     } catch (e) {
       console.error(
-        `Unable to establish a collection handle in ProductoDAO: ${e}`,
+        `Unable to establish a collection handle in VentasDAO: ${e}`,
       )
     }
   }
 
-  static async getProducto({
+  static async getVentas({
     filters = null,
     page = 0,
-    productosPerPage = 20,
+    ventassPerPage = 20,
   } = {}) {
     let query
     if (filters) {
       if ("descripcion" in filters) {
         query = { $text: { $search: filters["descripcion"] } }
-      } else if ("id_producto" in filters) {
-        query = { "id_producto": { $eq: filters["id_producto"] } }
+      } else if ("id_ventas" in filters) {
+        query = { "id_ventas": { $eq: filters["id_ventas"] } }
       }
     }
 
     let cursor
     
     try {
-      cursor = await producto
+      cursor = await ventas
         .find(query)
     } catch (e) {
       console.error(`Unable to issue find command, ${e}`)
-      return { productosList: [], totalNumProductos: 0 }
+      return { ventasList: [], totalNumVentas: 0 }
     }
 
-    const displayCursor = cursor.limit(productosPerPage).skip(productosPerPage * page)
+    const displayCursor = cursor.limit(ventassPerPage).skip(ventassPerPage * page)
 
     try {
-      const productosList = await displayCursor.toArray()
-      const totalNumProductos = await producto.countDocuments(query)
+      const ventasList = await displayCursor.toArray()
+      const totalNumVentas = await ventas.countDocuments(query)
 
-      return { productosList, totalNumProductos }
+      return { ventasList, totalNumVentas }
     } catch (e) {
       console.error(
         `Unable to convert cursor to array or problem counting documents, ${e}`,
       )
-      return { productosList: [], totalNumProductos: 0 }
+      return { ventasList: [], totalNumVentas: 0 }
     }
   }
 
-  static async addProducto(id_producto,nombre_producto, descripcion, valor_unitario,estado) {
+  static async addVentas(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
     try {
-      const productoDoc = { id_producto: id_producto,
-        nombre_producto: nombre_producto,
-        descripcion: descripcion,
-        valor_unitario: valor_unitario,
-        estado: estado, }
+      const ventasDoc = { id_ventas: id_ventas,
+        id_cliente: id_cliente,
+        vendedor: vendedor,
+        nombre_cliente: nombre_cliente,
+        fecha_venta: fecha_venta,
+        estado_venta: estado_venta,
+        valor_venta:valor_venta }
 
-      return await producto.insertOne(productoDoc)
+      return await ventas.insertOne(ventasDoc)
     } catch (e) {
       console.error(`Unable to post review: ${e}`)
       return { error: e }
     }
   }
 
-  static async updateProducto(id_producto,nombre_producto,descripcion, valor_unitario,estado) {
+  static async updateVentas(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
     try {
-      const updateProducto = await producto.updateOne(
-        /*{ id_producto:"3"},*/
-        {id_producto: id_producto},
-        { $set: { descripcion: descripcion, nombre_producto: nombre_producto,
-          valor_unitario: valor_unitario, estado: estado  } },
+      const updateVentas = await venta.updateOne(
+        /*{ id_ventas:"3"},*/
+        {id_ventas: id_ventas},
+        { $set: { id_cliente: id_cliente, vendedor: vendedor, nombre_cliente:nombre_cliente,
+          fecha_venta: fecha_venta, estado_venta: estado_venta, valor_venta:valor_venta  } },
       )
 
-      return updateProducto
+      return updateVentas
     } catch (e) {
       console.error(`Unable to update review: ${e}`)
       return { error: e }
     }
   }
 
-  static async deleteProducto(id_producto) {
+  static async deleteVentas(id_ventas) {
 
     try {
-      const deleteProducto = await producto.deleteOne({
-        id_producto: id_producto
+      const deleteVentas = await ventas.deleteOne({
+        id_ventas: id_ventas
       })
 
-      return deleteProducto
+      return deleteVentas
     } catch (e) {
       console.error(`Unable to delete review: ${e}`)
       return { error: e }
@@ -102,7 +104,7 @@ export default class ProductoDAO {
 
 
 }
-  /*static async getProductoByID(id) {
+  /*static async getVentasByID(id) {
     try {
       const pipeline = [
         {
