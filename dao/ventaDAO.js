@@ -4,11 +4,11 @@ let ventas
 
 export default class VentaDAO {
   static async injectDB(conn) {
-    if (ventas) {
+    if (venta) {
       return
     }
     try {
-      ventas = await conn.db(process.env.RESTREVIEWS_NS).collection("ventas")
+      venta = await conn.db(process.env.RESTREVIEWS_NS).collection("venta")
     } catch (e) {
       console.error(
         `Unable to establish a collection handle in VentaDAO: ${e}`,
@@ -25,8 +25,8 @@ export default class VentaDAO {
     if (filters) {
       if ("descripcion" in filters) {
         query = { $text: { $search: filters["descripcion"] } }
-      } else if ("id_ventas" in filters) {
-        query = { "id_ventas": { $eq: filters["id_ventas"] } }
+      } else if ("id_venta" in filters) {
+        query = { "id_venta": { $eq: filters["id_venta"] } }
       }
     }
 
@@ -55,9 +55,9 @@ export default class VentaDAO {
     }
   }
 
-  static async addVenta(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
+  static async addVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
     try {
-      const ventasDoc = { id_ventas: id_ventas,
+      const ventasDoc = { id_venta: id_venta,
         id_cliente: id_cliente,
         vendedor: vendedor,
         nombre_cliente: nombre_cliente,
@@ -72,11 +72,11 @@ export default class VentaDAO {
     }
   }
 
-  static async updateVenta(id_ventas,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
+  static async updateVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
     try {
       const updateVentas = await venta.updateOne(
-        /*{ id_ventas:"3"},*/
-        {id_ventas: id_ventas},
+        /*{ id_venta:"3"},*/
+        {id_venta: id_venta},
         { $set: { id_cliente: id_cliente, vendedor: vendedor, nombre_cliente:nombre_cliente,
           fecha_venta: fecha_venta, estado_venta: estado_venta, valor_venta:valor_venta  } },
       )
@@ -88,11 +88,11 @@ export default class VentaDAO {
     }
   }
 
-  static async deleteVenta(id_ventas) {
+  static async deleteVenta(id_venta) {
 
     try {
       const deleteVentas = await ventas.deleteOne({
-        id_ventas: id_ventas
+        id_venta: id_venta
       })
 
       return deleteVentas
