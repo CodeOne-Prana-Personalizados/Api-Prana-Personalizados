@@ -28,7 +28,7 @@ router
   .delete(UsuarioCtrl.apiDeleteUsuario)
 
   router
-  .route("/usuarios")
+  .route("/ventas")
   .get(VentasCtrl.apiGetVentas)
   .post(VentasCtrl.apiPostVentas)
   .put(VentasCtrl.apiUpdateVentas)
