@@ -1,5 +1,7 @@
 import UsuarioDAO from "../dao/usuarioDAO.js"
 
+
+
 export default class UsuarioController {
   static async apiGetUsuario(req, res, next) {
     const usuariosPerPage = req.query.usuariosPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20
@@ -27,6 +29,36 @@ export default class UsuarioController {
     }
     res.json(response)
   }
+  static async apiGetDatosUsuario(req, res, next) {
+    console.log('HOLAAAA')
+    consultarOcrearusuario(req, genercCallback(res));
+    const usuariosPerPage = req.query.usuariosPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20
+    const page = req.query.page ? parseInt(req.query.page, 10) : 0
+
+    let filters = {}
+    if (req.query.descripcion) {
+      filters.descripcion = req.query.descripcion
+    } else if (req.query.id_usuario) {
+      filters.id_usuario = req.query.id_usuario
+    } 
+
+    const { usuariosList, totalNumusuarios } = await UsuarioDAO.getUsuario({
+        filters,
+        page,
+        usuariosPerPage,
+      })
+
+      let response = {
+        usuarios: usuariosList,
+        page: page,
+        filters: filters,
+        entries_per_page: usuariosPerPage,
+        total_results: totalNumusuarios,
+      }
+      res.json(response)
+    console.log('HOLA LEEME')
+  }
+  
 
   static async apiPostUsuario(req, res, next) {
     try {
@@ -34,7 +66,6 @@ export default class UsuarioController {
       const nombre = req.body.nombre
       const correo = req.body.correo
       const celular = req.body.celular
-      const fecha_nacimiento = req.body.fecha_nacimiento
       const fecha_ingreso = req.body.fecha_ingreso
       const estado = req.body.estado
       const rol = req.body.rol
@@ -45,7 +76,6 @@ export default class UsuarioController {
         nombre,
         correo,
         celular,
-        fecha_nacimiento,
         fecha_ingreso,
         estado,
         rol,
@@ -62,7 +92,6 @@ export default class UsuarioController {
       const nombre = req.body.nombre
       const correo = req.body.correo
       const celular = req.body.celular
-      const fecha_nacimiento = req.body.fecha_nacimiento
       const fecha_ingreso = req.body.fecha_ingreso
       const estado = req.body.estado
       const rol = req.body.rol
@@ -72,7 +101,6 @@ export default class UsuarioController {
         nombre,
         correo,
         celular,
-        fecha_nacimiento,
         fecha_ingreso,
         estado,
         rol,
@@ -105,6 +133,7 @@ export default class UsuarioController {
   }
 
 }
+
   /*static async apiGetRestaurantById(req, res, next) {
     try {
       let id = req.params.id || {}
