@@ -55,7 +55,6 @@ export default class UsuarioDAO {
       return { usuariosList: [], totalNumusuarios: 0 }
     }
   }
- 
 
   static async addUsuario(id_usuario,nombre,correo,celular,fecha_nacimiento,fecha_ingreso,estado,rol) {
     try {
@@ -64,6 +63,7 @@ export default class UsuarioDAO {
         nombre:nombre, 
         correo:correo,
         celular:celular,
+        fecha_nacimiento: fecha_nacimiento,
         fecha_ingreso: fecha_ingreso,
         estado: estado,
         rol:rol,
@@ -84,6 +84,7 @@ export default class UsuarioDAO {
         { $set: { nombre:nombre, 
           correo:correo,
           celular:celular,
+          fecha_nacimiento: fecha_nacimiento,
           fecha_ingreso: fecha_ingreso,
           estado: estado,
           rol:rol  } },
@@ -109,32 +110,7 @@ export default class UsuarioDAO {
       return { error: e }
     }
   }
-  
 
-
-}
-
-export const consultarOcrearusuario = async (req, callback)=>{
-  const token = req.headers.authorization.split("Bearer")[1];
-  const user = jwt_decode(token) ['http://localhost/userData'];
-  console.log(user);
-
-  const baseDeDatos= getDB();
-  baseDeDatos.collection("usuario").findOne({ email: user.email },async (response)=>{
-    console.log("response consulta bd", response);
-    if(response){
-      callback(err, response)
-
-    }
-
-    else{
-      user.auth0ID= user._id;
-      delete user._id;
-      user.rol = "inactivo";
-      await UpdateUsuario(user,(err, respuesta)=>callback(err,user)
-      );
-    }
-  });
 
 }
   /*static async getusuarioByID(id) {

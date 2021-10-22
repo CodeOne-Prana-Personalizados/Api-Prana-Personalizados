@@ -65,6 +65,7 @@ export default class UsuarioController {
       const nombre = req.body.nombre
       const correo = req.body.correo
       const celular = req.body.celular
+      const fecha_nacimiento = req.body.fecha_nacimiento
       const fecha_ingreso = req.body.fecha_ingreso
       const estado = req.body.estado
       const rol = req.body.rol
@@ -75,6 +76,7 @@ export default class UsuarioController {
         nombre,
         correo,
         celular,
+        fecha_nacimiento,
         fecha_ingreso,
         estado,
         rol,
@@ -91,6 +93,7 @@ export default class UsuarioController {
       const nombre = req.body.nombre
       const correo = req.body.correo
       const celular = req.body.celular
+      const fecha_nacimiento = req.body.fecha_nacimiento
       const fecha_ingreso = req.body.fecha_ingreso
       const estado = req.body.estado
       const rol = req.body.rol
@@ -100,6 +103,7 @@ export default class UsuarioController {
         nombre,
         correo,
         celular,
+        fecha_nacimiento,
         fecha_ingreso,
         estado,
         rol,
@@ -132,7 +136,6 @@ export default class UsuarioController {
   }
 
 }
-
   /*static async apiGetRestaurantById(req, res, next) {
     try {
       let id = req.params.id || {}
