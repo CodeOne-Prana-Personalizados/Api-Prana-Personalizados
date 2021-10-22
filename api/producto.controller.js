@@ -31,14 +31,12 @@ export default class ProductoController {
   static async apiPostProducto(req, res, next) {
     try {
       const id_producto = req.body.id_producto
-      const nombre_producto = req.body.nombre_producto
       const descripcion = req.body.descripcion
       const valor_unitario = req.body.valor_unitario
       const estado = req.body.estado
 
       const MiProducto = await ProductoDAO.addProducto(
         id_producto,
-        nombre_producto,
         descripcion,
         valor_unitario,
         estado,
@@ -52,14 +50,12 @@ export default class ProductoController {
   static async apiUpdateProducto(req, res, next) {
     try {
       const id_producto = req.body.id_producto
-      const nombre_producto = req.body.nombre_producto
       const descripcion = req.body.descripcion
       const valor_unitario = req.body.valor_unitario
       const estado = req.body.estado
 
       const MiProducto = await ProductoDAO.updateProducto(
         id_producto,
-        nombre_producto,
         descripcion,
         valor_unitario,
         estado,

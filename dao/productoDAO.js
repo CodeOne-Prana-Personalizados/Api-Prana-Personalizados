@@ -56,10 +56,9 @@ export default class ProductoDAO {
     }
   }
 
-  static async addProducto(id_producto,nombre_producto, descripcion, valor_unitario,estado) {
+  static async addProducto(id_producto, descripcion, valor_unitario,estado) {
     try {
       const productoDoc = { id_producto: id_producto,
-        nombre_producto: nombre_producto,
         descripcion: descripcion,
         valor_unitario: valor_unitario,
         estado: estado, }
@@ -71,12 +70,12 @@ export default class ProductoDAO {
     }
   }
 
-  static async updateProducto(id_producto,nombre_producto,descripcion, valor_unitario,estado) {
+  static async updateProducto(id_producto,descripcion, valor_unitario,estado) {
     try {
       const updateProducto = await producto.updateOne(
         /*{ id_producto:"3"},*/
         {id_producto: id_producto},
-        { $set: { descripcion: descripcion, nombre_producto: nombre_producto,
+        { $set: { descripcion: descripcion, 
           valor_unitario: valor_unitario, estado: estado  } },
       )
 
