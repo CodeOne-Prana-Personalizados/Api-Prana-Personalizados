@@ -12,7 +12,6 @@ export default class VentaController {
     } else if (req.query.id_venta) {
       filters.id_venta = req.query.id_venta
     } 
- 
     const { ventasList, totalNumventas } = await VentaDAO.getVenta({
       filters,
       page,
