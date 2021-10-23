@@ -10,10 +10,10 @@ export default class VentaController {
     if (req.query.descripcion) {
       filters.descripcion = req.query.descripcion
     } else if (req.query.id_venta) {
-      filters.id_venta = req.query.venta
+      filters.id_venta = req.query.id_venta
     } 
 
-    const { ventasList, totalNumVentas } = await VentaDAO.getVenta({
+    const { ventasList, totalNumventas } = await VentaDAO.getVenta({
       filters,
       page,
       ventasPerPage,
@@ -24,7 +24,7 @@ export default class VentaController {
       page: page,
       filters: filters,
       entries_per_page: ventasPerPage,
-      total_results: totalNumVentas,
+      total_results: totalNumventas,
     }
     res.json(response)
   }
