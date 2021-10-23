@@ -65,7 +65,7 @@ export default class VentaController {
         const id_cliente = req.body.id_cliente
         const nombre_producto = req.body.nombre_producto
         const vendedor = req.body.vendedor
-        const nombre_cliente= req.body.nombre_client
+        const nombre_cliente= req.body.nombre_cliente
         const fecha_venta = req.body.fecha_venta
         const estado_venta = req.body.estado_venta
         const valor_venta = req.body.valor_venta

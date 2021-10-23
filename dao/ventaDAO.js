@@ -101,11 +101,11 @@ export default class VentaDAO {
   static async deleteVenta(id_venta) {
 
     try {
-      const deleteVenta = await venta.deleteOne({
+      const deleteventa = await venta.deleteOne({
         id_venta: id_venta
       })
 
-      return deleteVenta
+      return deleteventa
     } catch (e) {
       console.error(`Unable to delete review: ${e}`)
       return { error: e }
