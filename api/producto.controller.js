@@ -1,5 +1,6 @@
 import ProductoDAO from "../dao/productoDAO.js"
 
+
 export default class ProductoController {
   static async apiGetProducto(req, res, next) {
     const productosPerPage = req.query.productosPerPage ? parseInt(req.query.productosPerPage, 10) : 20
