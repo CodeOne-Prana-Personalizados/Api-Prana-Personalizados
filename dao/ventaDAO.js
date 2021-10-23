@@ -75,7 +75,7 @@ export default class VentaDAO {
     }
   }
 
-  static async updateVenta(id_venta,id_cliente,nombre_producto, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
+  static async updateVenta(id_venta,id_cliente,nombre_producto, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta,cantidad, valor_total) {
     try {
       const updateVenta = await venta.updateOne(
         /*{ id_venta:"3"},*/

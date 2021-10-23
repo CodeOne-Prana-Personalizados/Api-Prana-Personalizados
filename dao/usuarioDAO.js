@@ -99,11 +99,11 @@ export default class UsuarioDAO {
   static async deleteUsuario(id_usuario) {
 
     try {
-      const deleteUsuario = await usuario.deleteOne({
+      const deleteusuario = await usuario.deleteOne({
         id_usuario: id_usuario
       })
 
-      return deleteUsuario
+      return deleteusuario
     } catch (e) {
       console.error(`Unable to delete review: ${e}`)
       return { error: e }

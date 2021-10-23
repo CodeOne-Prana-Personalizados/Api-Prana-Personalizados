@@ -44,11 +44,10 @@ export default class VentaController {
       const MiVenta = await VentaDAO.addVenta(
         id_venta,
         id_cliente,
-        vendedor,
         nombre_producto,
+        vendedor,
         nombre_cliente,
         fecha_venta,
-        estado_venta,
         estado_venta,
         valor_venta,
         cantidad,
@@ -64,9 +63,9 @@ export default class VentaController {
     try {
       const id_venta = req.body.id_venta
         const id_cliente = req.body.id_cliente
+        const nombre_producto = req.body.nombre_producto
         const vendedor = req.body.vendedor
         const nombre_cliente= req.body.nombre_client
-        const nombre_producto = req.body.nombre_producto
         const fecha_venta = req.body.fecha_venta
         const estado_venta = req.body.estado_venta
         const valor_venta = req.body.valor_venta
@@ -76,9 +75,9 @@ export default class VentaController {
       const MiVenta = await VentaDAO.updateVenta(
         id_venta,
         id_cliente,
+        nombre_producto,
         vendedor,
         nombre_cliente,
-        nombre_producto,
         fecha_venta,
         estado_venta,
         valor_venta,
