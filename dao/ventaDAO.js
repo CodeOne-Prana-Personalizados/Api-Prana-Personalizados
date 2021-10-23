@@ -55,7 +55,7 @@ export default class VentaDAO {
     }
   }
 
-  static async addVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta) {
+  static async addVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta,cantidad,valor_total) {
     try {
       const ventaDoc = { id_venta: id_venta,
         id_cliente: id_cliente,
@@ -63,7 +63,9 @@ export default class VentaDAO {
         nombre_cliente: nombre_cliente,
         fecha_venta: fecha_venta,
         estado_venta: estado_venta,
-        valor_venta:valor_venta }
+        valor_venta:valor_venta,
+        cantidad: cantidad,
+        valor_total }
 
       return await venta.insertOne(ventaDoc)
     } catch (e) {
@@ -82,7 +84,9 @@ export default class VentaDAO {
            nombre_cliente:nombre_cliente,
           fecha_venta: fecha_venta, 
           estado_venta: estado_venta, 
-          valor_venta:valor_venta  } },
+          valor_venta:valor_venta,
+          cantidad: cantidad,
+          valor_total: valor_total  } },
       )
 
       return updateVenta
