@@ -55,10 +55,11 @@ export default class VentaDAO {
     }
   }
 
-  static async addVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta,cantidad,valor_total) {
+  static async addVenta(id_venta,id_cliente,nombre_producto, vendedor,nombre_cliente, fecha_venta, estado_venta,valor_venta,cantidad,valor_total) {
     try {
       const ventaDoc = { id_venta: id_venta,
         id_cliente: id_cliente,
+        nombre_producto: nombre_producto,
         vendedor: vendedor,
         nombre_cliente: nombre_cliente,
         fecha_venta: fecha_venta,
@@ -74,14 +75,15 @@ export default class VentaDAO {
     }
   }
 
-  static async updateVenta(id_venta,id_cliente, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
+  static async updateVenta(id_venta,id_cliente,nombre_producto, vendedor,nombre_cliente, fecha_venta, estado_venta, valor_venta) {
     try {
       const updateVenta = await venta.updateOne(
         /*{ id_venta:"3"},*/
         {id_venta: id_venta},
         { $set: { id_cliente: id_cliente, 
+          nombre_producto: nombre_producto,
           vendedor: vendedor,
-           nombre_cliente:nombre_cliente,
+          nombre_cliente:nombre_cliente,
           fecha_venta: fecha_venta, 
           estado_venta: estado_venta, 
           valor_venta:valor_venta,
