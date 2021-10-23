@@ -37,6 +37,8 @@ export default class VentaController {
       const fecha_venta = req.body.fecha_venta
       const estado_venta = req.body.estado_venta
       const valor_venta = req.body.valor_venta
+      const cantidad = req.body.cantidad
+      const valor_total = req.body.valor_total
 
       const MiVenta = await VentaDAO.addVenta(
         id_venta,
@@ -47,6 +49,8 @@ export default class VentaController {
         estado_venta,
         estado_venta,
         valor_venta,
+        cantidad,
+        valor_total
       )
       res.json({ status: "success" })
     } catch (e) {
@@ -63,6 +67,8 @@ export default class VentaController {
         const fecha_venta = req.body.fecha_venta
         const estado_venta = req.body.estado_venta
         const valor_venta = req.body.valor_venta
+        const cantidad = req.body.cantidad
+        const valor_total = req.body.valor_total
 
       const MiVenta = await VentaDAO.updateVenta(
         id_venta,
@@ -71,8 +77,9 @@ export default class VentaController {
         nombre_cliente,
         fecha_venta,
         estado_venta,
-        estado_venta,
         valor_venta,
+        cantidad,
+        valor_total
       )
 
       var { error } = MiVenta
