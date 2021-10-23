@@ -1,7 +1,6 @@
 import UsuarioDAO from "../dao/usuarioDAO.js"
 
 
-
 export default class UsuarioController {
   static async apiGetUsuario(req, res, next) {
     const usuariosPerPage = req.query.usuariosPerPage ? parseInt(req.query.usuariosPerPage, 10) : 20

@@ -78,7 +78,7 @@ export default class UsuarioDAO {
 
   static async updateUsuario(id_usuario,nombre,correo,celular,fecha_nacimiento,fecha_ingreso,estado,rol) {
     try {
-      const updateusuario = await usuario.updateOne(
+      const updateUsuario = await usuario.updateOne(
         /*{ id_usuario:"3"},*/
         {id_usuario: id_usuario},
         { $set: { nombre:nombre, 
@@ -99,7 +99,7 @@ export default class UsuarioDAO {
   static async deleteUsuario(id_usuario) {
 
     try {
-      const deleteusuario = await usuario.deleteOne({
+      const deleteUsuario = await usuario.deleteOne({
         id_usuario: id_usuario
       })
 

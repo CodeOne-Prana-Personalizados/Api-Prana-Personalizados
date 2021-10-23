@@ -1,7 +1,7 @@
 import express from "express"
 import ProductoCtrl from "./producto.controller.js"
 import UsuarioCtrl from "./usuario.controller.js"
-import VentasCtrl from "./ventas.controller.js"
+import VentaCtrl from "./venta.controller.js"
 
 const router = express.Router()
 
@@ -28,11 +28,12 @@ router
   .delete(UsuarioCtrl.apiDeleteUsuario)
  
   router
-  .route("/usuarios")
-  .get(VentasCtrl.apiGetVentas)
-  .post(VentasCtrl.apiPostVentas)
-  .put(VentasCtrl.apiUpdateVentas)
-  .delete(VentasCtrl.apiDeleteVentas)
+  .route("/ventas")
+  .get(VentaCtrl.apiGetVenta)
+  .post(VentaCtrl.apiPostVenta)
+  .put(VentaCtrl.apiUpdateVenta)
+  .delete(VentaCtrl.apiDeleteVenta)
+
 
   router
   .route('/usuarios/self')
