@@ -34,7 +34,6 @@ router
   .put(VentaCtrl.apiUpdateVenta)
   .delete(VentaCtrl.apiDeleteVenta)
 
-
   router
   .route('/usuarios/self')
   .get(UsuarioCtrl.apiGetDatosUsuario
