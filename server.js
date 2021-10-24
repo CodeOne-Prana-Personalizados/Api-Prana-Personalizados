@@ -8,7 +8,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-
+/* 
 var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
@@ -21,7 +21,7 @@ var jwtCheck = jwt({
   algorithms: ['RS256']
 });
 
-app.use(jwtCheck)
+app.use(jwtCheck) */
 
 
 app.use("/api/v1/producto", producto)
