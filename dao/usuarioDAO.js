@@ -57,7 +57,7 @@ export default class UsuarioDAO {
   }
  
 
-  static async addUsuario(id_usuario,nombre,correo,celular,fecha_nacimiento,fecha_ingreso,estado,rol) {
+  static async addUsuario(id_usuario,nombre,correo,celular,fecha_ingreso,estado,rol) {
     try {
       const usuarioDoc = { 
         id_usuario:id_usuario,
@@ -76,7 +76,7 @@ export default class UsuarioDAO {
     }
   }
 
-  static async updateUsuario(id_usuario,nombre,correo,celular,fecha_nacimiento,fecha_ingreso,estado,rol) {
+  static async updateUsuario(id_usuario,nombre,correo,celular,fecha_ingreso,estado,rol) {
     try {
       const updateUsuario = await usuario.updateOne(
         /*{ id_usuario:"3"},*/
