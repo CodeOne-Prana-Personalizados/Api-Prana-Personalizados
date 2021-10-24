@@ -180,7 +180,6 @@ export const consultarOcrearusuario = async (req, callback)=>{
       throw e
     }
   }
-
   static async getCuisines() {
     let cuisines = []
     try {

@@ -149,7 +149,6 @@ export default class UsuarioController {
       res.status(500).json({ error: e })
     }
   }
-
   static async apiGetRestaurantCuisines(req, res, next) {
     try {
       let cuisines = await RestaurantsDAO.getCuisines()
